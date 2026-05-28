@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:zikmuzik/services/preferences_service.dart';
+import 'package:get/get.dart';
+import 'package:zikmuzik/core/services/preferences_service.dart';
+import 'package:zikmuzik/widgets/biometric_setup_screen.dart';
 import 'package:zikmuzik/widgets/home_page.dart';
+import 'package:zikmuzik/widgets/login_page.dart';
 import 'package:zikmuzik/widgets/onboarding_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+List<GetPage> pages = [
+  GetPage(name: '/', page: () => HomePage()),
+  GetPage(name: '/login', page: () => LoginPage()),
+  GetPage(name: '/onboarding', page: () => OnboardingPage()),
+  GetPage(name: '/biometric', page: () => BiometricSetupScreen()),
+];
 Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   PreferencesService.instance.init();
   bool? isOnboardingDone = await PreferencesService.instance.getBool(
@@ -20,11 +31,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      initialRoute: '/',
+      getPages: pages,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'zikmuzik',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.blue)),
       home: isOnboardingDone ? const HomePage() : const OnboardingPage(),
+      navigatorKey: Get.key,
     );
   }
 }

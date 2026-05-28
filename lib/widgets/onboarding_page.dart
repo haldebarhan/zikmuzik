@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zikmuzik/models/onboard_item.dart';
-import 'package:zikmuzik/services/preferences_service.dart';
-import 'package:zikmuzik/widgets/home_page.dart';
+import 'package:zikmuzik/core/services/preferences_service.dart';
+import 'package:zikmuzik/widgets/login_page.dart';
 import 'package:zikmuzik/widgets/onboard_item_widget.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -62,7 +62,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       if (mounted) {
         Navigator.of(
           context,
-        ).pushReplacement(MaterialPageRoute(builder: (_) => const HomePage()));
+        ).pushReplacement(MaterialPageRoute(builder: (_) => const LoginPage()));
       }
     }
   }

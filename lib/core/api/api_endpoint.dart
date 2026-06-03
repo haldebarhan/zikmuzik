@@ -5,4 +5,5 @@ class ApiEndpoints {
   static const String me = '/auth/me';
   static const String socialVerify = '/auth/social/verify';
   static const String registerSocial = '/auth/register/social';
+  static const String announcements = '/announcements/search';
 }

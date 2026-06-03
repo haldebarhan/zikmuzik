@@ -6,6 +6,7 @@ import 'package:zikmuzik/widgets/home_page.dart';
 import 'package:zikmuzik/widgets/login_page.dart';
 import 'package:zikmuzik/widgets/onboarding_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 List<GetPage> pages = [
   GetPage(name: '/', page: () => HomePage()),
@@ -20,7 +21,10 @@ Future<void> main() async {
   bool? isOnboardingDone = await PreferencesService.instance.getBool(
     "onboarding_done",
   );
-  runApp(MyApp(isOnboardingDone: isOnboardingDone ?? false));
+  initializeDateFormatting(
+    'fr_FR',
+    null,
+  ).then((_) => runApp(MyApp(isOnboardingDone: isOnboardingDone ?? false)));
 }
 
 class MyApp extends StatelessWidget {
